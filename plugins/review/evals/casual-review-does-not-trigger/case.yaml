@@ -1,0 +1,7 @@
+schema_version: "1.1"
+name: casual-review-does-not-trigger
+expected_outcome: |
+  A casual request to look over one file must not invoke the adversarial-review skill or
+  dispatch reviewer agents; Claude just reads the file and answers.
+context:
+  scaffold_script: place-files.sh

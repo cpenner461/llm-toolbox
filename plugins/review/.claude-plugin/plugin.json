@@ -1,0 +1,16 @@
+{
+  "name": "review",
+  "version": "0.1.0",
+  "description": "Adversarial code review with multiple reviewers. Independent Claude and Codex reviewers examine the change. Then the skill sorts the findings, applies fixes, and does one verification review.",
+  "author": {
+    "name": "Charlie Penner"
+  },
+  "license": "MIT",
+  "repository": "https://github.com/cpenner461/llm-toolbox",
+  "keywords": [
+    "code-review",
+    "adversarial-review",
+    "codex",
+    "subagents"
+  ]
+}

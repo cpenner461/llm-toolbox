@@ -1,0 +1,15 @@
+schema_version: "1.1"
+name: catches-seeded-bugs
+expected_outcome: |
+  The adversarial-review skill runs on a small Python repo whose feature branch has five
+  seeded bugs: list_notes uses offset page*page_size (page 1 skips the first page); exporting
+  a missing attachment raises an uncaught FileNotFoundError instead of AttachmentNotFound and
+  the CLI shows a traceback; the attachment path check only rejects names starting with "..",
+  so "a/../../x" and absolute paths escape; test_search_is_case_insensitive searches with the
+  same casing it stored, while search is actually case-sensitive; page_size above 100 raises
+  ValueError instead of being clamped as the spec requires. The f-string that interpolates
+  the constant NEWEST_FIRST into SQL is safe and should not be accepted as an injection bug.
+  Reviewers run in parallel, the main session triages and fixes, one fresh verification
+  reviewer checks the fixes, and the response ends with a summary table.
+context:
+  scaffold_script: place-files.sh

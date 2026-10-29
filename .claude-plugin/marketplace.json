@@ -1,0 +1,14 @@
+{
+  "name": "llm-toolbox",
+  "description": "Personal Claude Code plugins and LLM tools.",
+  "owner": {
+    "name": "Charlie Penner"
+  },
+  "plugins": [
+    {
+      "name": "review",
+      "source": "./plugins/review",
+      "description": "Adversarial code review with multiple reviewers. Independent Claude and Codex reviewers examine the change. Then the skill sorts the findings, applies fixes, and does one verification review."
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+schema_version: "1.1"
+name: deep-report-only
+expected_outcome: |
+  The skill runs in deep and report-only modes on the seeded-bug fixture. The correctness
+  reviewer is dispatched with the deep correctness model and the design reviewer with the
+  deep design model from config.env, and Codex runs with --deep or is reported as skipped.
+  Findings are triaged and reported with a mode line and summary table, but no source or test
+  file is edited and no verification reviewer is dispatched.
+context:
+  scaffold_script: place-files.sh

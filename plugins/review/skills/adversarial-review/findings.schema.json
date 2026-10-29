@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Adversarial review findings",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["reviewer", "summary", "findings"],
+  "properties": {
+    "reviewer": {
+      "type": "string",
+      "description": "Who produced this report: correctness, design, codex, or verify."
+    },
+    "summary": {
+      "type": "string",
+      "description": "Two or three sentences: overall verdict, and say plainly if nothing significant was found."
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "severity", "location", "title", "claim", "evidence", "repro", "suggested_fix", "confidence"],
+        "properties": {
+          "id": { "type": "string", "description": "Reviewer prefix plus number, e.g. C1, D2, X3, V1." },
+          "severity": { "type": "string", "enum": ["critical", "high", "medium", "low"] },
+          "location": { "type": "string", "description": "path/relative/to/repo:line (or line range)." },
+          "title": { "type": "string", "description": "One line naming the problem." },
+          "claim": { "type": "string", "description": "What is wrong and what goes wrong as a result." },
+          "evidence": { "type": "string", "description": "The code, spec text, or observed behaviour that shows it." },
+          "repro": { "type": "string", "description": "Command, input, or failing test demonstrating it, with observed output. Empty string if not feasible." },
+          "suggested_fix": { "type": "string", "description": "The smallest change that fixes it." },
+          "confidence": { "type": "string", "enum": ["high", "medium", "low"] }
+        }
+      }
+    }
+  }
+}
