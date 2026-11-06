@@ -69,7 +69,7 @@ The `model:` line in each agent file sets the Claude reviewer model:
 - `plugins/review/agents/adversarial-reviewer-correctness.md` (opus)
 - `plugins/review/agents/adversarial-reviewer-design.md` (sonnet)
 
-The file `plugins/review/skills/adversarial-review/config.env` contains the models for deep mode and all Codex settings: on or off, model, `-c` overrides, and timeout.
+The file `plugins/review/skills/adversarial-review/config.env` contains the models for deep mode and all Codex settings: on or off, model, `-c` overrides, session log, and timeout. By default, Codex saves a session log for each review in `~/.codex/sessions`, so usage tools can count its tokens. Set `CODEX_REVIEW_EPHEMERAL=1` to run without a log.
 
 The Claude models are in the agent files because Claude Code reads the model of a subagent from there. A separate configuration file can become different from the agent files without an indication.
 

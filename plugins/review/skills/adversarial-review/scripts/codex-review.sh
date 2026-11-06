@@ -37,9 +37,10 @@ fi
 prompt="$wd/codex-prompt.md"
 { cat "$wd/packet.md"; echo; cat "$skill_dir/codex-focus.md"; } > "$prompt"
 
-args=(exec --sandbox read-only --ephemeral --color never -C "$repo"
+args=(exec --sandbox read-only --color never -C "$repo"
       --output-schema "$skill_dir/findings.schema.json"
       -o "$wd/codex-findings.json")
+[[ "${CODEX_REVIEW_EPHEMERAL:-0}" == 1 ]] && args+=(--ephemeral)
 [[ -n "${CODEX_REVIEW_MODEL:-}" ]] && args+=(-m "$CODEX_REVIEW_MODEL")
 for kv in ${CODEX_REVIEW_EXTRA_CONFIG:-}; do args+=(-c "$kv"); done
 
