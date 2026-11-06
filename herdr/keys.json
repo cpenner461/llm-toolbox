@@ -1,0 +1,8 @@
+{
+  "global": {
+    "cmd-shift-k": "mod.open:ask-herdr"
+  },
+  "terminal": {
+    "cmd-.": "send:\u0003"
+  }
+}

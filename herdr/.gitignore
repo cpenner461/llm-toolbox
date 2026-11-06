@@ -1,0 +1,4 @@
+# Written by Herdr (and `herdr-app check`) into every mod folder.
+gpui-kit.d.ts
+jsconfig.json
+*.error

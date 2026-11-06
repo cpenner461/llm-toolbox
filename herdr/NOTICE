@@ -1,0 +1,16 @@
+mods/my-spaces, mods/my-tabs and mods/my-agents are modified copies of the
+`spaces`, `tabs` and `agents` mods that ship with Herdr (herdr-app 0.1.13,
+https://github.com/herdrdev/herdr-app), licensed under the Apache License,
+Version 2.0 (https://www.apache.org/licenses/LICENSE-2.0). Each one's mod.json
+records `cloned_from`. Changes from the originals:
+
+- my-spaces: shows each space's select shortcut (for example ^1) at the end of
+  its row, read from the key bindings.
+- my-tabs: adds a "Git Log" panel button beside Files and Changes.
+- my-agents: shows the shortcut of each agent's space (for example ^1) beside
+  its row, read from the key bindings.
+
+layouts/my-main.json is a modified copy of Herdr's `main` layout under the same
+license. Everything else in this folder (git-log, usage, ask-herdr, the
+tokyo-night theme, keys.json) is original to this repository and covered by its
+MIT license.

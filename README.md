@@ -126,6 +126,26 @@ A version locks the installed copies. Machines that install from GitHub get a ch
 
 Commit the version change together with the change. `--plugin-dir` and local-path marketplaces do not use the version.
 
+## Herdr setup
+
+`herdr/` is my [Herdr](https://herdr.dev) layout, laid out like Herdr's home folder
+(`~/.config/herdr-app`): the `my-main` layout, its mods (Git Log panel, Pull Requests
+panel, Usage panel, Ask Herdr dialog, and spaces/agents lists that show their `^1`
+shortcuts), the Tokyo Night theme and two keys. It is not a Claude Code plugin.
+
+To install it on a machine, tell an agent running in Herdr:
+
+```
+Read ~/.config/herdr-app/AGENTS.md, then add this layout: github.com/cpenner461/llm-toolbox/tree/main/herdr
+```
+
+Then do the two setup steps in `herdr/RECIPE.md` under "Watch out" (a statusline line
+for the Usage panel, and optional `CLAUDE.md` rules). To update another machine after
+changing something, copy the changed files from `~/.config/herdr-app` into `herdr/`,
+commit, and ask that machine's agent to update the layout from the same link.
+
+`herdr/NOTICE` lists which files are modified copies of Herdr's Apache-2.0 mods.
+
 ## Repository structure
 
 ```
@@ -137,6 +157,7 @@ llm-toolbox/
 │       ├── agents/
 │       ├── skills/<skill-name>/SKILL.md (+ supporting files)
 │       └── evals/
+├── herdr/                            # my Herdr layout and mods (not a plugin), see RECIPE.md
 ├── LICENSE
 └── README.md
 ```
