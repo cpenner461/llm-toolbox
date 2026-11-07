@@ -2,7 +2,7 @@
 // context, and an estimated cost.
 //
 // Claude: Claude Code hands its statusline the session's context, plan limits and
-// its own cost estimate; record-claude.sh (called from ~/.claude/statusline-command.sh)
+// its own cost estimate; record-claude.sh (called from Claude Code's statusline command)
 // keeps one file per session in ~/.cache/herdr-usage/claude, tagged with the Herdr
 // terminal it runs in. Codex: codex.sh reads ~/.codex/sessions; its cost is estimated
 // from token counts and LiteLLM's public price list (fetched once a day).
@@ -152,11 +152,13 @@ export default class Usage extends View {
     const live = agents();
     const today = midnight();
 
-    // Claude: the newest file has the current plan limits.
+    // Claude: each plan limit from the newest file that reports it (older Claude Code
+    // versions sometimes leave one out, and they shouldn't blank the other sessions').
     const claude = [...this.claude].sort((a, b) => (b.at ?? 0) - (a.at ?? 0));
-    const newest = claude.find((c) => c.rate_limits);
-    const c5 = windowOf(newest?.rate_limits?.five_hour?.used_percentage, newest?.rate_limits?.five_hour?.resets_at);
-    const c7 = windowOf(newest?.rate_limits?.seven_day?.used_percentage, newest?.rate_limits?.seven_day?.resets_at);
+    const limit = (name) => claude.find((c) => c.rate_limits?.[name]?.used_percentage != null)?.rate_limits[name];
+    const five = limit("five_hour"), week = limit("seven_day");
+    const c5 = windowOf(five?.used_percentage, five?.resets_at);
+    const c7 = windowOf(week?.used_percentage, week?.resets_at);
     const claudeLive = live.filter((a) => a.app === "claude-code").map((a) => ({ a, c: claude.find((c) => c.terminal === a.address) }));
     const claudeToday = claude.filter((c) => (c.at ?? 0) >= today).reduce((n, c) => n + (c.cost?.total_cost_usd ?? 0), 0);
 

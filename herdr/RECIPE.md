@@ -90,6 +90,8 @@ opened, 368px default, 280–900px).
   from `gh` show in the list, or as "refresh failed" when older results are still shown.
 - Usage reloads Claude data every 15 seconds and Codex every minute. Claude's cost is
   Claude Code's own per-session estimate, so "today" sums whole sessions active today.
+  Claude's 5h and Week meters each come from the newest session file that reports that
+  window, so a session that leaves one out doesn't blank it.
   Codex's cost is estimated from token counts and LiteLLM's public price list, fetched
   once a day; a model missing from it shows "—" and the total is shown as "≥".
 - Ask Herdr (`cmd-shift-k`): a dialog (560px) with a text box, three example requests
@@ -136,7 +138,7 @@ opened, 368px default, 280–900px).
      one `statusLine` in `~/.claude/settings.json` runs), after it reads its JSON into
      `$input`. Without it the Claude card shows no sessions or limits.
      ```sh
-     printf "%s" "$input" | "$HOME/.config/herdr-app/mods/usage/record-claude.sh" &
+     printf "%s" "$input" | "$HOME/.config/herdr-app/mods/usage/record-claude.sh" >/dev/null 2>&1 &
      ```
      With no statusline configured, make one: a script that does `input=$(cat)`, the line
      above, then prints a status.
@@ -159,6 +161,10 @@ opened, 368px default, 280–900px).
   `git`. Ask Herdr starts `claude`. PRs runs `gh` (installed and logged in with
   `gh auth login`; it reaches GitHub with that login) and `open`, which is macOS only:
   on Linux or Windows the `#number` link does nothing.
+- Claude sessions show in the Agents list, and as rows in the Claude card, only when
+  Claude Code reports its status to Herdr: 2.1.311 does, 2.1.285 doesn't. Sessions
+  started before an upgrade keep the old behavior until restarted. Older versions can
+  also leave a limit window out of the statusline JSON.
 - Codex runs started with `codex exec --ephemeral` leave no session log, so Usage can't
   see them.
 - Write each mod's `mod.json` before its `main.js`: Herdr docks a mod folder it first sees
